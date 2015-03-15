@@ -7,6 +7,33 @@ public class DataGenerativeInfo {
 	int smallestEle;
 	float meanEle;
 	int modeEle;
+	int range;
+	int[] indexMoveCount;
+	int size;
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public int[] getIndexMoveCount() {
+		return indexMoveCount;
+	}
+
+	public void setIndexMoveCount(int[] eleMoveCount) {
+		this.indexMoveCount = eleMoveCount;
+	}
+
+	public int getRange() {
+		return range;
+	}
+
+	public void setRange(int range) {
+		this.range = range;
+	}
 
 	public int getNumElements() {
 		return numElements;
@@ -54,5 +81,17 @@ public class DataGenerativeInfo {
 		smallestEle = 0;
 		meanEle = 0;
 		modeEle = 0;
+		range = 0;
+		indexMoveCount = null;
+	}
+	
+	public DataGenerativeInfo (int size) {
+		numElements = 0;
+		largestEle = 0;
+		smallestEle = 0;
+		meanEle = 0;
+		modeEle = 0;
+		range = 0;
+		indexMoveCount = new int[size];
 	}
 }
