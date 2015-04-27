@@ -17,7 +17,7 @@ public class Synth {
 	}
 
 	public Synth(int[] notes) {
-		this.notes = notes; //watch for bugs
+		this.notes = notes; 
 	}
 	
 	public void play(){
@@ -27,7 +27,7 @@ public class Synth {
 			synth.open();
 			MidiChannel channel = synth.getChannels()[0];
 			
-			//play note for 0.2 ms
+			//play note for 1s
 			for (int note : notes) {
 	              channel.noteOn(note, 50);
 	              try {

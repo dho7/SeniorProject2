@@ -1,7 +1,5 @@
 package edu.ycp.ModelClasses;
 
-import java.util.ArrayList;
-
 public class DataOperations {
 	
 	public DataOperations() {

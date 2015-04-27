@@ -23,4 +23,12 @@ public class MusicGenerator {
 		
 		return notes;
 	}
+	
+	public int[] getJazzNotes() {
+		int[] notes = new int[data.getSize()];
+		
+		int modalNote = 0;
+		
+		return notes;
+	}
 }

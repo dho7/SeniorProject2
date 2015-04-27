@@ -22,26 +22,32 @@ public class Main {
 
 		int numberRead = 2;
 
-		do  {
-			//read number and add it to array
-			numberRead = keyboard.nextInt();
-			if(numberRead > -1) {
-				data[index] = numberRead;
-				index++;
-			} else {
-				System.out.println("no negatives!");				
+		try {
+			do  {
+				//read number and add it to array
+				numberRead = keyboard.nextInt();
+				if(numberRead > -1) {
+					data[index] = numberRead;
+					index++;
+				} else {
+					System.out.println("no negatives!");				
+				}
+			} while(index < dataSize);
+
+			//print numbers for debug
+			for(int num : data) {
+				System.out.println(num);
 			}
-		} while(index < dataSize);
 
-		for(int num : data) {
-			System.out.println(num);
+			//genInfo (data about the data) to generate music notes
+			genInfo = algs.BubbleSortWithGenInfo(data);
+			musicGen = new MusicGenerator(genInfo);
+			int[] notes = musicGen.getNotes();
+
+			synth = new Synth(notes);
+			synth.play();
+		} finally {
+			keyboard.close();
 		}
-		
-		genInfo = algs.BubbleSortWithGenInfo(data);
-		musicGen = new MusicGenerator(genInfo);
-		int[] notes = musicGen.getNotes();
-
-		synth = new Synth(notes);
-		synth.play();
 	}
 }
