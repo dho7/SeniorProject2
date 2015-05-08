@@ -6,7 +6,7 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 
 public class Synth {
-	int[] notes;	
+	private int[] notes;	
 	
 	public int[] getNotes() {
 		return notes;

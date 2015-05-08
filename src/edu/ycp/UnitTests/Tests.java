@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ycp.ModelClasses.Algorithms;
-import edu.ycp.ModelClasses.DataGenerativeInfo;
+import edu.ycp.ModelClasses.BubbleSortDataGenerativeInfo;
 import edu.ycp.ModelClasses.DataOperations;
 import edu.ycp.ModelClasses.Tree;
 import edu.ycp.ModelClasses.TreeNode;
@@ -18,7 +18,7 @@ public class Tests {
 	int[] arrMode;
 	Algorithms algorithms;
 	DataOperations dataOps;
-	DataGenerativeInfo dataForArr1;
+	BubbleSortDataGenerativeInfo dataForArr1;
 	Tree tree1;
 	TreeNode node1;
 	TreeNode node2;
@@ -69,7 +69,7 @@ public class Tests {
 		// our algorithms for making music
 		algorithms = new Algorithms();
 		dataOps = new DataOperations();
-		dataForArr1 = new DataGenerativeInfo();
+		dataForArr1 = new BubbleSortDataGenerativeInfo();
 		/////////////////////////
 
 	}

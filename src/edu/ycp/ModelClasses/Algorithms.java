@@ -6,6 +6,12 @@ public class Algorithms {
 
 	}
 
+	private MergeSortDataGenerativeInfo mergeSortInfo; 
+	private int numMerges;
+	private int mergeSortRange;
+	private int numSplits;
+	private TreeDataGenerativeInfo treeGenInfo;
+
 	public void BubbleSort(int[] arr) {
 
 		boolean noSwaps = false;
@@ -30,9 +36,9 @@ public class Algorithms {
 		}
 	}
 
-	public DataGenerativeInfo BubbleSortWithGenInfo(int[] arr) {
+	public BubbleSortDataGenerativeInfo BubbleSortWithGenInfo(int[] arr) {
 
-		DataGenerativeInfo info = new DataGenerativeInfo();
+		BubbleSortDataGenerativeInfo info = new BubbleSortDataGenerativeInfo();
 		DataOperations ops = new DataOperations();
 		//initialize array to count passes through an index
 		int[] indexMoveCount = new int[arr.length];
@@ -86,6 +92,7 @@ public class Algorithms {
 
 	// public merge sort method that takes array a with size n
 	// and work array b with helper methods to split, merge, and copy
+	///////////////////////////////////////////////////////////////
 	public void mergeSort(int[] a, int[] b, int n) {
 		topDownMergeSplit(a, 0, n, b);
 	}
@@ -124,7 +131,81 @@ public class Algorithms {
 			a[k] = b[k];
 		}
 	}
-	
+	//////////////////////////////////////////////////////
+
+	//////////////////////////////////////////###MERGESORTWITHINFO
+	public MergeSortDataGenerativeInfo getMergeSortGenInfo(int[] data, int[] b, int n) {
+		mergeSortInfo = new MergeSortDataGenerativeInfo();
+		mergeSortWithGenInfo(data, b, n);
+		mergeSortInfo.setSize(n);
+		mergeSortInfo.setNumMerges(numMerges);
+		mergeSortInfo.setNumSplits(numSplits);
+		mergeSortInfo.setRange((data[n-1] - data[0]));
+		mergeSortInfo.setNumElements(n);
+		return mergeSortInfo;
+
+	}
+
+	public void mergeSortWithGenInfo(int[] a, int[] b, int n) {
+		topDownMergeSplitWithGenInfo(a, 0, n, b);
+	}
+
+	private void topDownMergeSplitWithGenInfo(int[] a,int iBegin,int iEnd, int[] b) {
+		if(iEnd - iBegin < 2) {
+			return;
+		}
+
+		int iMiddle = (iEnd + iBegin) / 2;
+		topDownMergeSplitWithGenInfo(a, iBegin, iMiddle, b);
+		numSplits++;
+		topDownMergeSplitWithGenInfo(a, iMiddle, iEnd, b);
+		numSplits++;
+		topDownMergeWithGenInfo(a, iBegin, iMiddle, iEnd, b);
+		numMerges++;
+		copyArrayWithGenInfo   (b, iBegin, iEnd, a);
+	}
+
+	private void topDownMergeWithGenInfo(int[] a,int iBegin,int iMiddle,int iEnd, int[] b) {
+		int i0 = iBegin;
+		int i1 = iMiddle;
+
+		for(int j = iBegin; j < iEnd; j++) {
+			if(i0 < iMiddle && (i1 >= iEnd || a[i0] <= a[i1])) {
+				b[j] = a[i0];
+				i0 = i0 + 1;
+			}
+			else  {
+				b[j] = a[i1];
+				i1 = i1 + 1;
+			}
+		}
+
+	}
+
+	private void copyArrayWithGenInfo(int[] b,int iBegin,int iEnd, int[] a) {
+		for(int k = iBegin; k < iEnd; k++) {
+			a[k] = b[k];
+		}
+	}
+	/////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////####TREEWITHGENINFO
+	public TreeDataGenerativeInfo getTreeDataGenerativeInfo(int[] data) {
+		treeGenInfo = new TreeDataGenerativeInfo();
+		Tree tree = new Tree();
+		for(int value : data) {
+			tree.insert(value);
+		}
+		treeGenInfo.setMaxValue(tree.findMaxNode(tree.getRoot()).getValue());
+		treeGenInfo.setMinValue(tree.findMinNode(tree.getRoot()).getValue());
+		treeGenInfo.setNumElements(data.length);
+		treeGenInfo.setSize(data.length);
+		treeGenInfo.setRange(treeGenInfo.getMaxValue() - treeGenInfo.getMinValue());
+		return treeGenInfo;
+	}
+
+	///////////////////////////////////////////////////////
+
 	/*
 	 * three way comparison, recursive binary search
 	 * returns index of key location
@@ -135,7 +216,7 @@ public class Algorithms {
 		}
 		else {
 			int imid = (imax + imin) / 2;
-			
+
 			if(a[imid] > key) {
 				return binarySearch(a, key, imin, imid -1);
 			}
