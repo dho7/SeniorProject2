@@ -26,6 +26,7 @@ public enum Notes {
 		this.value = value;
 	}
 	
+	//return their value associated with the Synth class
 	public int getValue() {
 		return this.value;
 	}	
